@@ -150,4 +150,30 @@ describe('nextBuildNumber', () => {
     const buildNumber = await nextBuildNumber('1.2.3', ['1.0.0', '1.1.1'])
     assert.equal(buildNumber, 0)
   })
+
+  it('Pre-release tags', async () => {
+    const buildNumber = await nextBuildNumber('1.2.3rc1', [
+      '1.2.3rc1',
+      '1.2.3rc1-0',
+      '1.2.3rc1-1'
+    ])
+    assert.equal(buildNumber, 2)
+  })
+
+  it('Pre-release tags with hyphens', async () => {
+    const buildNumber = await nextBuildNumber('1.2.3-rc1', [
+      '1.2.3-rc1',
+      '1.2.3-rc1-0',
+      '1.2.3-rc1-1'
+    ])
+    assert.equal(buildNumber, 2)
+  })
+
+  it('Pre-release tags no match', async () => {
+    const buildNumber = await nextBuildNumber('1.2.3rc1', [
+      '1.2.3rc0-0',
+      '1.2.3rc0-1'
+    ])
+    assert.equal(buildNumber, 0)
+  })
 })
