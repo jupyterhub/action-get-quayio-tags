@@ -42,10 +42,10 @@
     "semver": "^7.7.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.26.10",
-    "@babel/eslint-parser": "^7.27.0",
-    "@babel/preset-env": "^7.26.9",
-    "@github/local-action": "^3.1.4",
+    "@babel/core": "^7.27.1",
+    "@babel/eslint-parser": "^7.27.1",
+    "@babel/preset-env": "^7.27.1",
+    "@github/local-action": "^3.2.1",
     "@vercel/ncc": "^0.38.3",
     "eslint": "^8.57.1",
     "eslint-plugin-github": "^5.1.8",
