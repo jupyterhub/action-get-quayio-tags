@@ -28,7 +28,8 @@ jobs:
         id: checkout
         uses: actions/checkout@v4
         with:
-          persist-credentials: false
+          # stefanzweifel/git-auto-commit-action updates the current branch
+          persist-credentials: true
 
       - name: Setup Node.js
         id: setup-node
