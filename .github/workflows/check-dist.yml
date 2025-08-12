@@ -26,7 +26,7 @@ jobs:
     steps:
       - name: Checkout
         id: checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           # stefanzweifel/git-auto-commit-action updates the current branch
           persist-credentials: true
