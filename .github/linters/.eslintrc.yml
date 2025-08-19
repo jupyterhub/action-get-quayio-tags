@@ -13,6 +13,10 @@ ignorePatterns:
   - '**/dist/.*'
   - '**/coverage/.*'
   - '*.json'
+  - 'lib/**'
+  - 'dist/**'
+  - 'node_modules/**'
+  - 'coverage/**'
 
 parser: '@babel/eslint-parser'
 
