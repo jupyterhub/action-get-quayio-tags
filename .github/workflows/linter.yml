@@ -45,6 +45,9 @@ jobs:
           VALIDATE_JAVASCRIPT_STANDARD: false
           VALIDATE_ALL_CODEBASE: true
           VALIDATE_JSCPD: false
+          # Disable Biome, using prettier and eslint
+          VALIDATE_BIOME_FORMAT: false
+          VALIDATE_BIOME_LINT: false
 
   zizmor:
     name: Check actions security
