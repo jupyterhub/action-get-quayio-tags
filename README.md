@@ -49,11 +49,11 @@ env:
 steps:
   - name: Checkout
     id: checkout
-    uses: actions/checkout@v4
+    uses: actions/checkout@v6
 
   - name: Get build-number by looking at existing tags
     id: quayio
-    uses: manics/action-get-quayio-tags@main
+    uses: jupyterhub/action-get-quayio-tags@main
     with:
       repository: ${{ env.IMAGE }}
       version: ${{ env.APP_VERSION }}
