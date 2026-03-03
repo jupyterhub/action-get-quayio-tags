@@ -19,14 +19,14 @@ jobs:
     steps:
       - name: Checkout
         id: checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
           persist-credentials: false
 
       - name: Setup Node.js
         id: setup-node
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version-file: .node-version
           cache: npm
@@ -37,7 +37,7 @@ jobs:
 
       - name: Lint Codebase
         id: super-linter
-        uses: super-linter/super-linter/slim@ffde3b2b33b745cb612d787f669ef9442b1339a6 # v8.1.0
+        uses: super-linter/super-linter/slim@502f4fe48a81a392756e173e39a861f8c8efe056 # v8.3.0
         env:
           DEFAULT_BRANCH: main
           FILTER_REGEX_EXCLUDE: dist/**/*
@@ -45,6 +45,9 @@ jobs:
           VALIDATE_JAVASCRIPT_STANDARD: false
           VALIDATE_ALL_CODEBASE: true
           VALIDATE_JSCPD: false
+          # Disable Biome, using prettier and eslint
+          VALIDATE_BIOME_FORMAT: false
+          VALIDATE_BIOME_LINT: false
 
   zizmor:
     name: Check actions security
@@ -52,7 +55,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           persist-credentials: false
 

@@ -48,5 +48,5 @@ outputs:
       is also exported as the environment variable GET_QUAYIO_TAGS_BUILDNUMBER
 
 runs:
-  using: node20
+  using: node24
   main: dist/index.js
