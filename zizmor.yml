@@ -1,0 +1,7 @@
+rules:
+  unpinned-uses:
+    config:
+      policies:
+        # Trust GitHub owned actions
+        actions/*: ref-pin
+        github/*: ref-pin
