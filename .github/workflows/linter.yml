@@ -37,7 +37,7 @@ jobs:
 
       - name: Lint Codebase
         id: super-linter
-        uses: super-linter/super-linter/slim@502f4fe48a81a392756e173e39a861f8c8efe056 # v8.3.0
+        uses: super-linter/super-linter/slim@61abc07d755095a68f4987d1c2c3d1d64408f1f9 # v8.5.0
         env:
           DEFAULT_BRANCH: main
           FILTER_REGEX_EXCLUDE: dist/**/*
@@ -49,25 +49,4 @@ jobs:
           VALIDATE_BIOME_FORMAT: false
           VALIDATE_BIOME_LINT: false
 
-  zizmor:
-    name: Check actions security
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-        with:
-          persist-credentials: false
-
-      - name: Setup Python
-        uses: actions/setup-python@v6
-        with:
-          python-version: '3.13'
-
-      # zizmor is written in rust, but it's pushed to PyPI to make it easily installable
-      # https://woodruffw.github.io/zizmor/installation/#pypi
-      - name: Install Dependencies
-        run: pip install zizmor
-
-      - name: Run zizmor
-        run: zizmor .github/workflows/
+  # zizmor: Included in super-linter 8.5.0
