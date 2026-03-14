@@ -49,25 +49,4 @@ jobs:
           VALIDATE_BIOME_FORMAT: false
           VALIDATE_BIOME_LINT: false
 
-  zizmor:
-    name: Check actions security
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-        with:
-          persist-credentials: false
-
-      - name: Setup Python
-        uses: actions/setup-python@v6
-        with:
-          python-version: '3.13'
-
-      # zizmor is written in rust, but it's pushed to PyPI to make it easily installable
-      # https://woodruffw.github.io/zizmor/installation/#pypi
-      - name: Install Dependencies
-        run: pip install zizmor
-
-      - name: Run zizmor
-        run: zizmor .github/workflows/
+  # zizmor: Included in super-linter 8.5.0
