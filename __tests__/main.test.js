@@ -1,42 +1,71 @@
 /**
  * Unit tests for the action's main functionality, src/main.js
  */
-const { describe, it, mock } = require('node:test')
-const assert = require('node:assert/strict')
+import { describe, it, mock, afterEach } from 'node:test'
+import assert from 'node:assert/strict'
 
-const core = require('@actions/core')
-const quayio = require('../src/quayio')
-const main = require('../src/main')
+const debug = mock.fn()
+const getInput = mock.fn()
+const setFailed = mock.fn()
+const setOutput = mock.fn()
+const exportVariable = mock.fn()
+const info = mock.fn()
+
+// Mock the GitHub Actions core library
+// ESM: Need to mock whole module
+mock.module('@actions/core', {
+  namedExports: {
+    debug,
+    getInput,
+    setFailed,
+    setOutput,
+    exportVariable,
+    info
+  }
+})
+
+const getAllMatches = mock.fn()
+
+const { nextBuildNumber } = await import('../src/quayio.js')
+
+// ESM: Need to mock whole module, can't mock single function
+mock.module('../src/quayio.js', {
+  namedExports: {
+    getAllMatches,
+    nextBuildNumber
+  }
+})
+
+const { run } = await import('../src/main.js')
 
 describe('main', () => {
-  it('runs main with mocks', async function () {
-    // https://github.com/nodejs/help/issues/4295
+  afterEach(() => {
+    debug.mock.resetCalls()
+    getInput.mock.resetCalls()
+    setFailed.mock.resetCalls()
+    setOutput.mock.resetCalls()
+    exportVariable.mock.resetCalls()
+    info.mock.resetCalls()
+    getAllMatches.mock.resetCalls()
+  })
 
-    // Mock the GitHub Actions core library
-    const debug = mock.fn((...args) => {
-      console.debug(...args)
-    })
-    const getInput = mock.fn(a => {
+  it('runs main with mocks', async function () {
+    debug.mock.mockImplementation((...args) => console.debug(...args))
+    getInput.mock.mockImplementation(a => {
       if (a === 'version') return '1.2.3'
       if (a === 'repository') return 'owner/repo'
       if (a === 'strict') return 'true'
       if (a === 'allTags') return 'false'
       throw new Error(`Invalid input name ${a}`)
     })
-    const setFailed = mock.fn(() => {})
-    const setOutput = mock.fn(() => {})
-    const exportVariable = mock.fn(() => {})
 
-    mock.method(core, 'debug', debug)
-    mock.method(core, 'getInput', getInput)
-    mock.method(core, 'setFailed', setFailed)
-    mock.method(core, 'setOutput', setOutput)
-    mock.method(core, 'exportVariable', exportVariable)
+    getAllMatches.mock.mockImplementation(() => [
+      '1.2.3-1',
+      '1.2.3-62',
+      '1.2.3-53'
+    ])
 
-    const getAllMatches = mock.fn(() => ['1.2.3-1', '1.2.3-62', '1.2.3-53'])
-    mock.method(quayio, 'getAllMatches', getAllMatches)
-
-    await main.run()
+    await run()
 
     assert.equal(getInput.mock.callCount(), 4)
 
@@ -66,31 +95,16 @@ describe('main', () => {
   })
 
   it('checks main returns errors', async function () {
-    // Mock the GitHub Actions core library
-    const debug = mock.fn((...args) => {
-      console.debug(...args)
-    })
-    const getInput = mock.fn(a => {
+    debug.mock.mockImplementation((...args) => console.debug(...args))
+    getInput.mock.mockImplementation(a => {
       if (a === 'version') return '1.2.3'
       if (a === 'repository') return 'owner/repo'
       if (a === 'strict') return 'invalid'
       if (a === 'allTags') return 'invalid'
       throw new Error(`Invalid input name ${a}`)
     })
-    const setFailed = mock.fn(() => {})
-    const setOutput = mock.fn(() => {})
-    const exportVariable = mock.fn(() => {})
 
-    mock.method(core, 'debug', debug)
-    mock.method(core, 'getInput', getInput)
-    mock.method(core, 'setFailed', setFailed)
-    mock.method(core, 'setOutput', setOutput)
-    mock.method(core, 'exportVariable', exportVariable)
-
-    const getAllMatches = mock.fn(() => {})
-    mock.method(quayio, 'getAllMatches', getAllMatches)
-
-    await main.run()
+    await run()
 
     assert.equal(getInput.mock.callCount(), 4)
     assert.equal(getAllMatches.mock.callCount(), 0)

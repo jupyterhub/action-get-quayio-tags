@@ -1,4 +1,4 @@
-const semverValid = require('semver/functions/valid')
+import { valid as semverValid } from 'semver'
 
 async function _requestJson(url) {
   console.debug(`Fetching ${url}`)
@@ -94,4 +94,4 @@ function nextBuildNumber(version, tags) {
   return b + 1
 }
 
-module.exports = { getAllMatches, nextBuildNumber }
+export { getAllMatches, nextBuildNumber }

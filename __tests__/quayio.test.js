@@ -5,11 +5,11 @@
 // Jest fails to mock fetch
 // https://github.com/nodejs/undici/issues/1882
 // so use the built in node test framework instead
-const { describe, it, beforeEach, afterEach } = require('node:test')
-const assert = require('node:assert/strict')
-const { getAllMatches, nextBuildNumber } = require('../src/quayio')
+import { describe, it, beforeEach, afterEach } from 'node:test'
+import assert from 'node:assert/strict'
+import { getAllMatches, nextBuildNumber } from '../src/quayio.js'
 
-const { MockAgent, setGlobalDispatcher } = require('undici')
+import { MockAgent, setGlobalDispatcher } from 'undici'
 let mockAgent
 let tagInterceptor
 
