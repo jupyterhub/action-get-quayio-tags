@@ -47,7 +47,7 @@
     "@babel/preset-env": "^7.28.5",
     "@github/local-action": "^7.0.1",
     "@vercel/ncc": "^0.38.4",
-    "eslint": "^8.57.1",
+    "eslint": "^10.0.3",
     "eslint-plugin-github": "^5.1.8",
     "prettier": "^3.7.4",
     "undici": "^7.24.2"
