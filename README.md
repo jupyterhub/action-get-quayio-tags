@@ -122,6 +122,5 @@ steps:
 
 > [!NOTE]
 >
-> The `bundle` step is important! It will run
-> [`ncc`](https://github.com/vercel/ncc) to build the final JavaScript action
-> code with all dependencies included.
+> The `bundle` step is important! It will run [rollup](https://rollupjs.org/) to
+> build the final JavaScript action code with all dependencies included.

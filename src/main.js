@@ -1,5 +1,5 @@
-const core = require('@actions/core')
-const quayio = require('./quayio')
+import * as core from '@actions/core'
+import * as quayio from './quayio.js'
 
 function _string2bool(s, varname = 'variable') {
   if (s === 'true') return true
@@ -42,6 +42,4 @@ async function run() {
   }
 }
 
-module.exports = {
-  run
-}
+export { run }

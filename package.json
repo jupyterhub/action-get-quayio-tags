@@ -23,33 +23,31 @@
   "engines": {
     "node": ">=24"
   },
+  "type": "module",
   "scripts": {
     "bundle": "npm run format:write && npm run package",
     "format:write": "npx prettier --write .",
     "format:check": "npx prettier --check .",
-    "lint": "npx eslint . -c ./.github/linters/.eslintrc.yml",
-    "package": "npx ncc build src/index.js -o dist --source-map --license licenses.txt",
+    "lint": "npx eslint .",
+    "package": "rollup --config rollup.config.js",
     "package:watch": "npm run package -- --watch",
-    "test": "node --test --experimental-test-coverage __tests__/*.test.js",
+    "test": "node --test --experimental-test-module-mocks --experimental-test-coverage __tests__/*.test.js",
     "all": "npm run format:write && npm run lint && npm run test && npm run package"
   },
   "license": "MIT",
-  "eslintConfig": {
-    "extends": "./.github/linters/.eslintrc.yml"
-  },
   "dependencies": {
-    "@actions/core": "^2.0.1",
-    "semver": "^7.7.3"
+    "@actions/core": "^3.0.0",
+    "semver": "^7.7.4"
   },
   "devDependencies": {
-    "@babel/core": "^7.28.5",
-    "@babel/eslint-parser": "^7.28.5",
-    "@babel/preset-env": "^7.28.5",
     "@github/local-action": "^7.0.1",
-    "@vercel/ncc": "^0.38.4",
-    "eslint": "^8.57.1",
-    "eslint-plugin-github": "^5.1.8",
-    "prettier": "^3.7.4",
-    "undici": "^7.24.2"
+    "@rollup/plugin-commonjs": "^29.0.2",
+    "@rollup/plugin-node-resolve": "^16.0.3",
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.0.3",
+    "globals": "^17.4.0",
+    "prettier": "^3.8.1",
+    "rollup": "^4.59.0",
+    "undici": "^7.24.4"
   }
 }
