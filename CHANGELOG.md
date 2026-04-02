@@ -1,6 +1,6 @@
 # Changelog
 
-## v1.0.0 - 2026-03-??
+## v1.0.0 - 2026-04-02
 
 ([full changelog](https://github.com/jupyterhub/action-get-quayio-tags/compare/v0.1.0...v1.0.0))
 
