@@ -48,5 +48,7 @@ jobs:
           # Disable Biome, using prettier and eslint
           VALIDATE_BIOME_FORMAT: false
           VALIDATE_BIOME_LINT: false
+          # Dependabot bumps everything, this is just noise
+          VALIDATE_TRIVY: false
 
   # zizmor: Included in super-linter 8.5.0
