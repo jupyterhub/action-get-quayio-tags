@@ -47,14 +47,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v7.0.1
-        with:
-          persist-credentials: false
-
       - name: Test Local Action
         id: test-action
-        uses: ./
+        # https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax#example-using-an-action-in-the-same-repository-as-the-workflow-at-the-running-commit-recommended
+        # Resolves to the current commit, no checkout required
+        uses: $/
         with:
           repository: jupyterhub/jupyterhub
           # This is an old release, so won't be updated
