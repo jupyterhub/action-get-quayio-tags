@@ -46,8 +46,8 @@
     "@eslint/js": "^10.0.1",
     "eslint": "^10.14.0",
     "globals": "^17.14.0",
-    "prettier": "^3.9.10",
-    "rollup": "^4.67.5",
+    "prettier": "^3.10.1",
+    "rollup": "^4.68.2",
     "undici": "^8.12.4"
   }
 }
